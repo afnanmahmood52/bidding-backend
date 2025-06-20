@@ -18,3 +18,4 @@ import { UsersModule } from '../users/users.module';
   controllers: [BidsController],
 })
 export class BidsModule {}
+
