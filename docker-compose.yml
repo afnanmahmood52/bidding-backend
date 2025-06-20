@@ -1,38 +1,10 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:16
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: bidding
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
-  
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - '5050:80'
-    depends_on:
-      - db
-
   backend:
     build: .
     restart: unless-stopped
     ports:
       - '3000:3000'
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/bidding
-    depends_on:
-      - db
-
-volumes:
-  pgdata:
+      DATABASE_URL: postgresql://postgres.rhydtrchiwmnzavezpqb:mashlahore@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
