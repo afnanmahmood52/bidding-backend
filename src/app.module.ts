@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { ItemsModule } from './items/items.module';
 import { BidsModule } from './bids/bids.module';
 import { User } from './users/user.entity';
+// import { BidsGatewayModule } from './bids/gateway/bids-gateway.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { User } from './users/user.entity';
     UsersModule,
     ItemsModule,
     BidsModule,
+    // BidsGatewayModule
   ],
   providers: [SeederService]
 })

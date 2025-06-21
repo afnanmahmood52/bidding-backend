@@ -10,6 +10,7 @@ import { Bid } from './bid.entity';
 import { ItemsService } from '../items/items.service';
 import { UsersService } from '../users/users.service';
 import { Item } from '../items/item.entity';
+// import { BidsGatewayService } from '../bids/gateway/bids-gateway.service';
 
 @Injectable()
 export class BidsService {
@@ -19,6 +20,7 @@ export class BidsService {
     private readonly itemsService: ItemsService,
     private readonly usersService: UsersService,
     private readonly dataSource: DataSource,
+    //  private readonly bidsGatewayService: BidsGatewayService
   ) {}
 
   async placeBid(itemId: number, userId: number, amount: number) {
@@ -61,6 +63,12 @@ export class BidsService {
         item,
         user,
       });
+
+
+      // Emit updated bids to all clients
+      // const updatedBids = await this.getBidsForItem(itemId);
+      // this.bidsGatewayService.emitBids(itemId, updatedBids);
+
 
       return manager.getRepository(Bid).save(bid);
     });
