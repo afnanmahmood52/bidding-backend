@@ -25,14 +25,19 @@ export class ItemsService {
     });
   }
 
-   async findAllWithHighestBids() {
-    const items = await this.repo.find({ relations: ['bids'] });
+  async findAllWithHighestBids(page = 1, limit = 9) {
+    const [items, total] = await this.repo.findAndCount({
+      relations: ['bids'],
+      order: { createdAt: 'DESC' },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
 
-    return items.map((item) => {
+    const transformed = items.map((item) => {
       const endTime = new Date(item.createdAt.getTime() + item.durationMinutes * 60 * 1000);
       const highestBid = item.bids.reduce(
         (max, bid) => (+bid.amount > +max.amount ? bid : max),
-        { amount: item.startingPrice },
+        { amount: item.startingPrice } as any,
       );
 
       return {
@@ -41,7 +46,16 @@ export class ItemsService {
         timeRemaining: Math.max(0, endTime.getTime() - Date.now()),
       };
     });
+
+    return {
+      items: transformed,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
+
 
   async remove(id: number) {
     const item = await this.repo.findOne({ where: { id } });

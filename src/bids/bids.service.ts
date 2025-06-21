@@ -64,12 +64,6 @@ export class BidsService {
         user,
       });
 
-
-      // Emit updated bids to all clients
-      // const updatedBids = await this.getBidsForItem(itemId);
-      // this.bidsGatewayService.emitBids(itemId, updatedBids);
-
-
       return manager.getRepository(Bid).save(bid);
     });
   }

@@ -7,16 +7,18 @@ import { BidsController } from './bids.controller';
 
 import { ItemsModule } from '../items/items.module';
 import { UsersModule } from '../users/users.module';
-import { BidsGatewayModule } from './gateway/bids-gateway.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Bid]),
     ItemsModule,
-    UsersModule
+    UsersModule,
+    EventsModule
   ],
   providers: [BidsService, BidsService],
   controllers: [BidsController],
+  exports: [BidsService]
 })
 export class BidsModule {}
 
