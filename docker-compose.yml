@@ -8,3 +8,4 @@ services:
       - '3000:3000'
     environment:
       DATABASE_URL: postgresql://postgres.rhydtrchiwmnzavezpqb:mashlahore@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
+      FRONTEND_URL: http://localhost:5173
