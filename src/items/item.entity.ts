@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, VersionColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, VersionColumn, UpdateDateColumn } from 'typeorm';
 import { Bid } from '../bids/bid.entity';
 
 @Entity()
@@ -15,8 +15,11 @@ export class Item {
   @Column('decimal')
   startingPrice: number;
 
-   @CreateDateColumn({ type: 'timestamp' }) // this replaces `startTime`
+  @CreateDateColumn({ type: 'timestamp' }) // this replaces `startTime`
   createdAt: Date;
+
+  @UpdateDateColumn({ default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
 
   @Column()
   durationMinutes: number;
