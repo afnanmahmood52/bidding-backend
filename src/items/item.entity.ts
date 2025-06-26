@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, VersionColumn } from 'typeorm';
 import { Bid } from '../bids/bid.entity';
 
 @Entity()
@@ -20,6 +20,9 @@ export class Item {
 
   @Column()
   durationMinutes: number;
+
+  @VersionColumn({ default: 1 })
+  version: number;
 
   @OneToMany(() => Bid, (bid) => bid.item)
   bids: Bid[];

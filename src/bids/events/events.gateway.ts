@@ -84,8 +84,6 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     try {
       const bids = await this.bidsService.getBidsForItem(id);
 
-      console.log("bids-->", bids);
-
       client.emit('itemBids', { itemId: id, bids });
     } catch (err) {
       client.emit('itemBidsError', {
